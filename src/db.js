@@ -1,8 +1,4 @@
 import mysql from 'mysql2/promise';
-const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '383838',
-  database: 'lectureBlog',
-});
+import dbOption from '../config/db.json';
+const db = mysql.createPool(dbOption);
 export default db;
