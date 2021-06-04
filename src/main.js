@@ -5,8 +5,10 @@ import session from 'express-session';
 import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
+import passport from 'passport';
 
 import authRouter from './routes/auth';
+import passportConfig from './passport';
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ const corsOption = {
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
+passportConfig();
 
 app.use(cors(corsOption));
 app.use(morgan('dev'));
@@ -35,6 +38,10 @@ app.use(
     name: 'session-cookie',
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
