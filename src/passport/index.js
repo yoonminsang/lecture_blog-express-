@@ -13,7 +13,7 @@ const passportConfig = () => {
   passport.deserializeUser(async (id, done) => {
     try {
       const [[user]] = await db.query(
-        `SELECT id, email, grade FROM users WHERE id=${id}`
+        `SELECT id, email, grade FROM users WHERE id='${id}'`
       );
       console.log('deserialize', user, id);
       done(null, user);
@@ -32,7 +32,7 @@ const passportConfig = () => {
         try {
           console.log('local strategy', email, password);
           const [[user]] = await db.query(
-            `SELECT * FROM users WHERE email='${email}`
+            `SELECT * FROM users WHERE email='${email}'`
           );
           if (user) {
             const match = await bcrypt.compare(password, user.password);

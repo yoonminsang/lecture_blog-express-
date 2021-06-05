@@ -1,7 +1,8 @@
-import express, { json } from 'express';
+import express from 'express';
 import db from '../db';
 import bcrypt from 'bcrypt';
 import { v4 as uuidv4 } from 'uuid';
+import passport from 'passport';
 
 const router = express.Router();
 
