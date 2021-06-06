@@ -9,7 +9,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const user = req.user;
   if (user) return res.json({ user });
-  else return res.status(409).json();
+  else return res.json({ user: null });
 });
 
 router.post('/register', async (req, res, next) => {
