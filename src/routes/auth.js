@@ -7,8 +7,9 @@ import passport from 'passport';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const user = req.user || null;
-  return res.json(user);
+  const user = req.user;
+  if (user) return res.json({ user });
+  else return res.status(409).json();
 });
 
 router.post('/register', async (req, res, next) => {
