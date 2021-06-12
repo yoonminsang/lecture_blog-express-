@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(err.status || 500);
+  return res.status(err.status || 500).json();
 });
 
 app.listen(app.get('port'), () => {
