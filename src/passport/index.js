@@ -6,7 +6,7 @@ const LocalStrategy = Strategy.Strategy;
 
 const passportConfig = () => {
   passport.serializeUser((user, done) => {
-    console.log('serialize', user);
+    console.log('serialize');
     done(null, user.id);
   });
 
@@ -15,10 +15,10 @@ const passportConfig = () => {
       const [[user]] = await db.query(
         `SELECT id, email, grade FROM users WHERE id='${id}'`
       );
-      console.log('deserialize', user, id);
+      console.log('deserialize', user);
       done(null, user);
     } catch (e) {
-      console.error('deserialize', e);
+      console.error('deserialize error', e);
     }
   });
 
@@ -41,7 +41,7 @@ const passportConfig = () => {
           }
           return done(null, false);
         } catch (e) {
-          console.error('local passport', e);
+          console.error('local passport error', e);
         }
       }
     )
