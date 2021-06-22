@@ -7,8 +7,9 @@ import path from 'path';
 import cors from 'cors';
 import passport from 'passport';
 
-import authRouter from './routes/auth';
 import passportConfig from './passport';
+import authRouter from './routes/auth';
+import postsRouter from './routes/posts';
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRouter);
+app.use('/posts', postsRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
