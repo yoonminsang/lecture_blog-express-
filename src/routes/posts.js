@@ -9,7 +9,7 @@ router.get('/page/:pageId', async (req, res) => {
   const [postList] = await db.query(
     `SELECT title, content, email from posts JOIN users ON posts.user=users.id ORDER BY posts.id DESC LIMIT 10 OFFSET ${offset};`
   );
-  return postList;
+  return res.json({ postList });
 });
 
 router.post('/write', async (req, res) => {
