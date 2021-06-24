@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/page/:pageId', async (req, res) => {
   const pageId = req.params.pageId;
-  const offset = (pageId - 1) * 10;
+  const offset = (pageId - 1) * 20;
   const [postList] = await db.query(
-    `SELECT title, content, email from posts JOIN users ON posts.user=users.id ORDER BY posts.id DESC LIMIT 10 OFFSET ${offset};`
+    `SELECT posts.id, title, content, email, date_format(posts.created, '%y.%m.%d %H:%i') as created from posts JOIN users ON posts.user=users.id ORDER BY posts.id DESC LIMIT 20 OFFSET ${offset};`
   );
   return res.json({ postList });
 });
